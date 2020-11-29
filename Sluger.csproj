@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Sluger</Title>
+        <Description>Generare random slugs</Description>
+        <RepositoryUrl>https://github.com/MrABoutin/Sluger</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Utils" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include=".github\workflows\main.yml" />
+    </ItemGroup>
+
+</Project>
