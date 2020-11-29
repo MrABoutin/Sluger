@@ -30,4 +30,4 @@ jobs:
         run: dotnet build
         
       - name: Deploy Package
-        run: dotnet nuget push Sluger/bin/Release/Sluger.1.0.0.nupkg --source github -k ${{ secrets.API_KEY }}
+        run: dotnet nuget push Sluger/bin/Debug/Sluger.1.0.0.nupkg --source https://nuget.pkg.github.com/MrABoutin/index.json -k ${{ secrets.API_KEY }}
