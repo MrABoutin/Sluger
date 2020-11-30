@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build package
-        run: dotnet build
+        run: dotnet build -c Release
         
       - name: Deploy Package
-        run: dotnet nuget push bin/Debug/Sluger.1.0.0.nupkg --source https://nuget.pkg.github.com/MrABoutin/index.json -k ${{ secrets.API_KEY }}
+        run: dotnet nuget push bin/Release/ --source https://nuget.pkg.github.com/MrABoutin/index.json -k ${{ secrets.API_KEY }}
