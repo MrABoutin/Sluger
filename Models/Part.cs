@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -165,5 +166,29 @@ namespace Sluger.Models
 
         public List<string[]> GetAll() => new List<string[]>{First, Second,Third};
 
+        public string[] this[int i]
+        {
+            get
+            {
+                switch (i)
+                {
+                    case 0:
+                        return First;
+                        break;
+                    
+                    case 1:
+                        return Second;
+                        break;
+                    
+                    case 2:
+                        return Third;
+                        break;
+                    
+                    default:
+                        throw new ArgumentOutOfRangeException("i", "Parameter must be between 0 and 2");
+                }
+            }
+        }
+        
         }
 }

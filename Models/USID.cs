@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace Sluger.Models
 {
-    public class USID
+    public struct USID
     {
-        private Part Part = new Part();
-        public string Slug => string.Join("-", _slugs);
+        private static Part Part;
+        public string Slug => ToString();
         /// <summary>
         /// Default: 3
         /// </summary>
@@ -25,36 +25,46 @@ namespace Sluger.Models
         /// </summary>
         private int MaxSlugLength { get; set; }
         private string[] _slugs { get; set; }
-
+        
+        
         /// <summary>
         /// Set the maximum number of parts on the slug, default 3
         /// </summary>
         /// <param name="i">Number of parts</param>
         public void SetParts(int i) => SlugParts = i;
-        
         /// <summary>
         /// Set the length of the slug parts
         /// </summary>
         /// <param name="i">Length of parts</param>
         public void SetLength(int i) => SlugLength = i;
-        
         /// <summary>
         /// Set the minimum length of the slugs parts
         /// </summary>
         /// <param name="i">Minimum length</param>
         public void SetMinLength(int i) => MinSlugLength = i;
-        
         /// <summary>
         /// Set the minimum length of the slugs parts
         /// </summary>
         /// <param name="i">Maximum length</param>
         public void SetMaxLength(int i) => MaxSlugLength = i;
 
-        public override string ToString() => Slug;
-
-        public USID()
+        public override string ToString()
         {
-            Build();
+            if (_slugs == null || !_slugs.Any()) Build();
+            return String.Join('-', _slugs);
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (!(obj is USID))
+            {
+                return false;
+            }
+            else
+            {
+                var u = (USID)obj;
+                return u.Slug == Slug;
+            }
         }
 
         public USID Build()
@@ -63,8 +73,7 @@ namespace Sluger.Models
             _slugs = new string[SlugParts];
             for (int i = 0; i < SlugParts; i++)
             {
-                string p = GetPart(i);
-                _slugs[i] = GetPart(i);
+                _slugs[i] = GetPart(i+1);
             }
             return this;
         }
@@ -76,8 +85,10 @@ namespace Sluger.Models
         /// <returns></returns>
         private string GetPart(int i)
         {
-            int r = new Random().Next(1,3);
-            return Part.GetAll()[i][r].ToLower();
+            if(i < 1 || i > 3) throw new ArgumentException("Parameter must be between 1 and 3");
+            var part = Part[i-1];
+            int r = new Random().Next(0, part.Length - 1);
+            return part[r].ToLower();
         }
 
     }
