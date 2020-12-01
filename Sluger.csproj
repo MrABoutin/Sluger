@@ -6,7 +6,7 @@
         <Title>Sluger</Title>
         <Description>Generare random slugs</Description>
         <RepositoryUrl>https://github.com/MrABoutin/Sluger</RepositoryUrl>
-        <PackageVersion>0.5</PackageVersion>
+        <PackageVersion>0.5.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
